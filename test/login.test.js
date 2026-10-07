@@ -8,7 +8,7 @@ describe("", () => {
   describe("POST /login", () => {
     it("Deve retornar 200 com tokem em string quanto usar credenciais validas", async () => {
       const bodyLogin = { ...postLogin };
-      const resposta = await request(process.env.API_URL)
+      const resposta = await request(process.env.BASE_URL)
         .post("/login")
         .set("Content-Type", "application/json")
         .send(bodyLogin);

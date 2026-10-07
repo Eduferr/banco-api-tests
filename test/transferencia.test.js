@@ -16,7 +16,7 @@ describe("Transferências", () => {
     it("Deve retornar sucesso 201 quando o valor da transferência for >= que R$10,00", async () => {
       const bodyTransferencia = { ...postTransferencia };
 
-      const resposta = await request(process.env.API_URL)
+      const resposta = await request(process.env.BASE_URL)
         .post("/transferencias")
         .set("content-Type", "application/json")
         .set("Authorization", `Bearer ${token}`)
@@ -29,7 +29,7 @@ describe("Transferências", () => {
       const bodyTransferencia = { ...postTransferencia };
       bodyTransferencia.valor = 9;
 
-      const resposta = await request(process.env.API_URL)
+      const resposta = await request(process.env.BASE_URL)
         .post("/transferencias")
         .set("content-Type", "application/json")
         .set("Authorization", `Bearer ${token}`)
@@ -41,12 +41,12 @@ describe("Transferências", () => {
 
   describe("GET /transferencias/{id}", async () => {
     it("Deve retornar sucesso com 200 e dados iguais ao registro de transferência quando o ID for válido", async () => {
-      const resposta = await request(process.env.API_URL)
+      const resposta = await request(process.env.BASE_URL)
         .get("/transferencias/10")
         .set("Authorization", `Bearer ${token}`);
 
-      console.log(resposta.status);
-      console.log(resposta.body);
+      // console.log(resposta.status);
+      // console.log(resposta.body);
       expect(resposta.status).to.equal(200);
       expect(resposta.body.id).to.equal(10);
       expect(resposta.body.id).to.be.a("number");
@@ -58,7 +58,7 @@ describe("Transferências", () => {
 
   describe('GET / Transferencias', () => {
     it('Deve retornar 10 elementos na paginação quando informar limite de 10 registros', async() => {
-        const resposta = await request(process.env.API_URL)
+        const resposta = await request(process.env.BASE_URL)
         .get("/transferencias?page=1&limit=10")
         .set("Authorization", `Bearer ${token}`);
 
